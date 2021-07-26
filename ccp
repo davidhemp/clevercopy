@@ -14,16 +14,14 @@ rm ${IDENTITY}.pub
 }
 
 # Generate key
-echo "Generate key"
 ssh-keygen -t ecdsa -f ${IDENTITY} -q -N ""
 
 # Copy key to new server
-echo "Copy key"
-ssh-copy-id -i ${IDENTITY} ${TARGET_HOST}
+ssh-copy-id -i ${IDENTITY} ${TARGET_HOST} > /dev/null
 
 # Copy data from file lists
 echo "Copy Data"
 ssh -i ${IDENTITY} ${TARGET_HOST} "uptime"
 
 # Trigger clean up
-#cleanup
+cleanup
